@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>USAWorkFinder — Find Jobs Across America</title>
+<style>
+  :root{ --ink:#122024; --paper:#F3F1EC; --line:#D8D3C7; --accent:#2E6E5E; --accent-soft:#DCEAE4; --muted:#5B6B6E; }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Iowan Old Style","Georgia",serif;line-height:1.5;}
+  header{padding:2.2rem 1.5rem 1.5rem;border-bottom:2px solid var(--ink);max-width:900px;margin:0 auto;}
+  h1{font-size:1.9rem;margin:0 0 .3rem;}
+  .tag{color:var(--muted);font-size:1rem;margin:0;font-style:italic;}
+  .search{max-width:900px;margin:1.4rem auto;padding:0 1.5rem;display:flex;gap:.6rem;flex-wrap:wrap;}
+  input,button{font-family:inherit;font-size:1rem;padding:.7rem .9rem;border:1.5px solid var(--ink);border-radius:3px;background:#fff;color:var(--ink);}
+  input{flex:2;min-width:160px;}
+  button{background:var(--ink);color:#fff;cursor:pointer;}
+  .job-list{max-width:900px;margin:0 auto;padding:0 1.5rem 3rem;}
+  .job{border-bottom:1px solid var(--line);padding:1.3rem 0;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+  .job h3{margin:0 0 .2rem;font-size:1.15rem;}
+  .job .co{color:var(--accent);font-weight:600;}
+  .job .meta{color:var(--muted);font-size:.92rem;margin-top:.3rem;}
+  .job .pay{white-space:nowrap;font-weight:600;background:var(--accent-soft);padding:.35rem .7rem;border-radius:3px;align-self:center;}
+  .job a{color:inherit;text-decoration:none;}
+  .empty{text-align:center;color:var(--muted);padding:3rem 1rem;font-style:italic;}
+</style>
+</head>
+<body>
+<header>
+  <h1>USAWorkFinder</h1>
+  <p class="tag">Live jobs from across the United States.</p>
+</header>
+
+<div class="search">
+  <input id="q" placeholder="Job title (e.g. Accountant)">
+  <input id="loc" placeholder="City or state (optional)">
+  <button onclick="search()">Search</button>
+</div>
+
+<div class="job-list" id="jobs"><div class="empty">Search above to see live listings.</div></div>
+
+<script>
+async function search(){
+  const what = document.getElementById('q').value;
+  const where = document.getElementById('loc').value;
+  const el = document.getElementById('jobs');
+  el.innerHTML = '<div class="empty">Loading…</div>';
+  try{
+    const res = await fetch(`/.netlify/functions/jobs?what=${encodeURIComponent(what)}&where=${encodeURIComponent(where)}`);
+    const jobs = await res.json();
+    el.innerHTML = jobs.length ? jobs.map(j => `
+      <div class="job">
+        <div>
+          <h3><a href="${j.url}" target="_blank">${j.title}</a></h3>
+          <div class="co">${j.co}</div>
+          <div class="meta">${j.loc} · ${j.cat}</div>
+        </div>
+        <div class="pay">${j.pay}</div>
+      </div>`).join('') : '<div class="empty">No jobs found — try a different search.</div>';
+  }catch(e){
+    el.innerHTML = '<div class="empty">Something went wrong. Try again.</div>';
+  }
+}
+</script>
+</body>
+</html>
