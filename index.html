@@ -11,61 +11,109 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>USAWorkFinder — Find Jobs Across America</title>
+<title>USAWorkFinder — Find Work Across America</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{ --ink:#122024; --paper:#F3F1EC; --line:#D8D3C7; --accent:#2E6E5E; --accent-soft:#DCEAE4; --muted:#5B6B6E; }
+  :root{
+    --navy:#0B2545; --red:#B31942; --paper:#FAF9F6; --ink:#161A1D;
+    --muted:#5B6472; --line:#E3E0D8; --gold:#C9A227; --card:#FFFFFF;
+    padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  }
   *{box-sizing:border-box;}
-  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Iowan Old Style","Georgia",serif;line-height:1.5;}
-  header{padding:2.2rem 1.5rem 1.5rem;border-bottom:2px solid var(--ink);max-width:900px;margin:0 auto;}
-  h1{font-size:1.9rem;margin:0 0 .3rem;}
-  .tag{color:var(--muted);font-size:1rem;margin:0;font-style:italic;}
-  .search{max-width:900px;margin:1.4rem auto;padding:0 1.5rem;display:flex;gap:.6rem;flex-wrap:wrap;}
-  input,button{font-family:inherit;font-size:1rem;padding:.7rem .9rem;border:1.5px solid var(--ink);border-radius:3px;background:#fff;color:var(--ink);}
-  input{flex:2;min-width:160px;}
-  button{background:var(--ink);color:#fff;cursor:pointer;}
-  .job-list{max-width:900px;margin:0 auto;padding:0 1.5rem 3rem;}
-  .job{border-bottom:1px solid var(--line);padding:1.3rem 0;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
-  .job h3{margin:0 0 .2rem;font-size:1.15rem;}
-  .job .co{color:var(--accent);font-weight:600;}
-  .job .meta{color:var(--muted);font-size:.92rem;margin-top:.3rem;}
-  .job .pay{white-space:nowrap;font-weight:600;background:var(--accent-soft);padding:.35rem .7rem;border-radius:3px;align-self:center;}
-  .job a{color:inherit;text-decoration:none;}
-  .empty{text-align:center;color:var(--muted);padding:3rem 1rem;font-style:italic;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.55;}
+  h1,h2{font-family:"Fraunces",Georgia,serif;}
+
+  .ribbon{height:6px;background:repeating-linear-gradient(90deg,var(--red) 0 40px,#fff 40px 44px,var(--red) 44px 84px,#fff 84px 88px);}
+
+  header{background:var(--navy);color:#fff;padding:2.6rem 1.5rem 3.4rem;}
+  .wrap{max-width:920px;margin:0 auto;}
+  .brand{display:flex;align-items:center;gap:.6rem;font-size:1.05rem;font-weight:600;letter-spacing:.02em;color:#EDEFF2;margin-bottom:1.6rem;}
+  .brand svg{flex-shrink:0;}
+  header h1{font-size:2.4rem;font-weight:600;margin:0 0 .6rem;letter-spacing:-.01em;max-width:16ch;}
+  header p{color:#C7CEDA;font-size:1.08rem;margin:0;max-width:42ch;}
+
+  .search-card{max-width:920px;margin:-2.2rem auto 0;background:var(--card);border-radius:6px;box-shadow:0 10px 30px rgba(11,37,69,.14);padding:1.3rem;display:flex;gap:.7rem;flex-wrap:wrap;position:relative;z-index:2;}
+  input,button{font-family:"Inter",sans-serif;font-size:1rem;padding:.8rem 1rem;border:1.5px solid var(--line);border-radius:4px;}
+  input{flex:2;min-width:170px;background:#fff;color:var(--ink);}
+  input:focus,button:focus{outline:2px solid var(--gold);outline-offset:1px;}
+  button{background:var(--red);color:#fff;border-color:var(--red);font-weight:600;cursor:pointer;flex:0 0 auto;}
+  button:hover{background:#9A1636;}
+
+  main{max-width:920px;margin:0 auto;padding:2.6rem 1.5rem 4rem;}
+  .section-label{color:var(--muted);font-size:.9rem;font-weight:500;margin:0 0 1.2rem;}
+  .job{border:1px solid var(--line);border-left:3px solid var(--navy);background:var(--card);border-radius:4px;padding:1.2rem 1.3rem;margin-bottom:.9rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
+  .job h3{margin:0 0 .25rem;font-size:1.15rem;font-family:"Fraunces",Georgia,serif;font-weight:600;}
+  .job a{color:var(--ink);text-decoration:none;}
+  .job a:hover{color:var(--red);}
+  .job .co{color:var(--navy);font-weight:600;font-size:.96rem;}
+  .job .meta{color:var(--muted);font-size:.9rem;margin-top:.3rem;}
+  .pay{white-space:nowrap;font-weight:600;color:var(--navy);align-self:center;background:#EEF2F7;padding:.4rem .8rem;border-radius:4px;font-size:.95rem;}
+  .empty{text-align:center;color:var(--muted);padding:3.5rem 1rem;font-style:italic;border:1px dashed var(--line);border-radius:6px;}
+
+  footer{border-top:1px solid var(--line);padding:1.6rem 1.5rem;text-align:center;color:var(--muted);font-size:.85rem;}
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){--paper:#0F1215;--ink:#EDEFF2;--muted:#96A0AC;--line:#262B31;--card:#171B1F;}
+    input{background:#171B1F;color:#EDEFF2;border-color:#2E343B;}
+  }
 </style>
 </head>
 <body>
+<div class="ribbon"></div>
 <header>
-  <h1>USAWorkFinder</h1>
-  <p class="tag">Live jobs from across the United States.</p>
+  <div class="wrap">
+    <div class="brand">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect width="24" height="24" rx="3" fill="#C9A227"/><path d="M6 17L12 7L18 17" stroke="#0B2545" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      USAWorkFinder
+    </div>
+    <h1>Find work across America.</h1>
+    <p>Live listings pulled from employers nationwide — one search, every state.</p>
+  </div>
 </header>
 
-<div class="search">
-  <input id="q" placeholder="Job title (e.g. Accountant)">
+<div class="search-card">
+  <input id="q" placeholder="Job title — e.g. Accountant">
   <input id="loc" placeholder="City or state (optional)">
-  <button onclick="search()">Search</button>
+  <button onclick="search()">Search jobs</button>
 </div>
 
-<div class="job-list" id="jobs"><div class="empty">Search above to see live listings.</div></div>
+<main>
+  <p class="section-label" id="label">Search above to see live listings.</p>
+  <div id="jobs"></div>
+</main>
+
+<footer>USAWorkFinder — job listings aggregated for the U.S. market.</footer>
 
 <script>
 async function search(){
   const what = document.getElementById('q').value;
   const where = document.getElementById('loc').value;
   const el = document.getElementById('jobs');
-  el.innerHTML = '<div class="empty">Loading…</div>';
+  const label = document.getElementById('label');
+  label.textContent = 'Searching…';
+  el.innerHTML = '';
   try{
     const res = await fetch(`/.netlify/functions/jobs?what=${encodeURIComponent(what)}&where=${encodeURIComponent(where)}`);
     const jobs = await res.json();
-    el.innerHTML = jobs.length ? jobs.map(j => `
-      <div class="job">
-        <div>
-          <h3><a href="${j.url}" target="_blank">${j.title}</a></h3>
-          <div class="co">${j.co}</div>
-          <div class="meta">${j.loc} · ${j.cat}</div>
-        </div>
-        <div class="pay">${j.pay}</div>
-      </div>`).join('') : '<div class="empty">No jobs found — try a different search.</div>';
+    if(jobs.length){
+      label.textContent = `${jobs.length} jobs found`;
+      el.innerHTML = jobs.map(j => `
+        <div class="job">
+          <div>
+            <h3><a href="${j.url}" target="_blank">${j.title}</a></h3>
+            <div class="co">${j.co}</div>
+            <div class="meta">${j.loc} · ${j.cat}</div>
+          </div>
+          <div class="pay">${j.pay}</div>
+        </div>`).join('');
+    } else {
+      label.textContent = '';
+      el.innerHTML = '<div class="empty">No jobs found — try a different search.</div>';
+    }
   }catch(e){
+    label.textContent = '';
     el.innerHTML = '<div class="empty">Something went wrong. Try again.</div>';
   }
 }
