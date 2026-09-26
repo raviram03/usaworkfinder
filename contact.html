@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-15M145JMVP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-15M145JMVP');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact — USAWorkFinder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#0B2545;--red:#B31942;--paper:#FAF9F6;--ink:#161A1D;--muted:#5B6472;--line:#E3E0D8;--card:#FFFFFF;}
+  :root[data-theme="dark"]{--paper:#0F1215;--ink:#EDEFF2;--muted:#96A0AC;--line:#262B31;--card:#171B1F;}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#0F1215;--ink:#EDEFF2;--muted:#96A0AC;--line:#262B31;--card:#171B1F;}}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.65;}
+  h1{font-family:"Fraunces",Georgia,serif;}
+  .ribbon{height:6px;background:repeating-linear-gradient(90deg,var(--red) 0 40px,#fff 40px 44px,var(--red) 44px 84px,#fff 84px 88px);}
+  nav{background:var(--card);border-bottom:1px solid var(--line);padding:.9rem 1.5rem;}
+  .nav-wrap{max-width:760px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;}
+  .brand{display:flex;align-items:center;gap:.5rem;font-weight:600;text-decoration:none;color:var(--ink);}
+  .nav-links a{color:var(--muted);text-decoration:none;margin-left:1.2rem;font-size:.92rem;}
+  .theme-toggle{background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:20px;padding:.35rem .8rem;font-size:.82rem;font-family:"Inter",sans-serif;cursor:pointer;margin-left:1.2rem;}
+  main{max-width:760px;margin:0 auto;padding:3rem 1.5rem 4rem;}
+  h1{font-size:2rem;margin-bottom:1rem;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1.5rem;margin-top:1.5rem;}
+  .card p{margin:.3rem 0;}
+  a{color:var(--navy);}
+  footer{border-top:1px solid var(--line);padding:1.6rem 1.5rem;text-align:center;color:var(--muted);font-size:.85rem;}
+</style>
+</head>
+<body>
+<div class="ribbon"></div>
+<nav><div class="nav-wrap">
+  <a class="brand" href="index.html">🇺🇸 USAWorkFinder</a>
+  <div class="nav-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="contact.html">Contact</a><button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙 Dark</button></div>
+</div></nav>
+<main>
+  <h1>Get in Touch</h1>
+  <p>Have a question, found an issue with a listing, or want to suggest a feature? We'd love to hear from you.</p>
+  <div class="card">
+    <p><strong>Email:</strong> <a href="mailto:raviram191@gmail.com">raviram191@gmail.com</a></p>
+    <p>We typically respond within 1–2 business days.</p>
+  </div>
+</main>
+<footer>USAWorkFinder — job listings aggregated for the U.S. market.</footer>
+<script>
+function applyStoredTheme(){
+  const saved = localStorage.getItem('theme');
+  if(saved){
+    document.documentElement.setAttribute('data-theme', saved);
+    document.getElementById('themeBtn').textContent = saved === 'dark' ? '☀️ Light' : '🌙 Dark';
+  }
+}
+function toggleTheme(){
+  const current = document.documentElement.getAttribute('data-theme') ||
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  document.getElementById('themeBtn').textContent = next === 'dark' ? '☀️ Light' : '🌙 Dark';
+  try{ localStorage.setItem('theme', next); }catch(e){}
+}
+try{ applyStoredTheme(); }catch(e){}
+</script>
+</body>
+</html>
