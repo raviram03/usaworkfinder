@@ -22,33 +22,43 @@
     padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
   }
   :root[data-theme="dark"]{--paper:#0F1215;--ink:#EDEFF2;--muted:#96A0AC;--line:#262B31;--card:#171B1F;}
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){--paper:#0F1215;--ink:#EDEFF2;--muted:#96A0AC;--line:#262B31;--card:#171B1F;}
-  }
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--paper:#0F1215;--ink:#EDEFF2;--muted:#96A0AC;--line:#262B31;--card:#171B1F;}}
   *{box-sizing:border-box;}
   body{margin:0;background:var(--paper);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.55;}
   h1,h2{font-family:"Fraunces",Georgia,serif;}
-
   .ribbon{height:6px;background:repeating-linear-gradient(90deg,var(--red) 0 40px,#fff 40px 44px,var(--red) 44px 84px,#fff 84px 88px);}
 
-  header{background:var(--navy);color:#fff;padding:2.6rem 1.5rem 3.4rem;}
-  .wrap{max-width:920px;margin:0 auto;}
-  .top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.6rem;}
-  .brand{display:flex;align-items:center;gap:.55rem;font-size:1.05rem;font-weight:600;letter-spacing:.02em;color:#EDEFF2;}
+  nav{background:var(--card);border-bottom:1px solid var(--line);padding:.9rem 1.5rem;}
+  .nav-wrap{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;}
+  .brand{display:flex;align-items:center;gap:.5rem;font-weight:600;color:var(--ink);}
   .flag{border-radius:2px;flex-shrink:0;}
-  .theme-toggle{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);color:#EDEFF2;border-radius:20px;padding:.4rem .9rem;font-size:.85rem;font-family:"Inter",sans-serif;cursor:pointer;display:flex;align-items:center;gap:.4rem;}
-  .theme-toggle:hover{background:rgba(255,255,255,.18);}
-  header h1{font-size:2.4rem;font-weight:600;margin:0 0 .6rem;letter-spacing:-.01em;max-width:16ch;}
-  header p{color:#C7CEDA;font-size:1.08rem;margin:0;max-width:42ch;}
+  .nav-links{display:flex;gap:1.4rem;font-size:.92rem;}
+  .nav-links a{color:var(--muted);text-decoration:none;}
+  .nav-links a:hover{color:var(--navy);}
+  :root[data-theme="dark"] .nav-links a:hover{color:#7FA8D9;}
+  .nav-right{display:flex;align-items:center;gap:.9rem;font-size:.92rem;}
+  .nav-right a{color:var(--muted);text-decoration:none;}
+  .post-btn{background:var(--navy);color:#fff;padding:.5rem 1rem;border-radius:4px;font-weight:600;font-size:.88rem;}
+  .theme-toggle{background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:20px;padding:.35rem .8rem;font-size:.82rem;font-family:"Inter",sans-serif;cursor:pointer;}
 
-  .search-card{max-width:920px;margin:-2.2rem auto 0;background:var(--card);border-radius:6px;box-shadow:0 10px 30px rgba(11,37,69,.14);padding:1.3rem;display:flex;gap:.7rem;flex-wrap:wrap;position:relative;z-index:2;}
-  input,button{font-family:"Inter",sans-serif;font-size:1rem;padding:.8rem 1rem;border:1.5px solid var(--line);border-radius:4px;}
-  input{flex:2;min-width:170px;background:var(--card);color:var(--ink);}
-  input:focus,button:focus{outline:2px solid var(--gold);outline-offset:1px;}
+  header{background:var(--navy);color:#fff;padding:2.6rem 1.5rem 3.4rem;}
+  .wrap{max-width:1000px;margin:0 auto;}
+  header h1{font-size:2.3rem;font-weight:600;margin:0 0 .5rem;letter-spacing:-.01em;max-width:16ch;}
+  header p{color:#C7CEDA;font-size:1.05rem;margin:0;max-width:42ch;}
+
+  .search-card{max-width:1000px;margin:-2rem auto 0;background:var(--card);border-radius:6px;box-shadow:0 10px 30px rgba(11,37,69,.14);padding:1.2rem;position:relative;z-index:2;}
+  .search-row{display:flex;gap:.7rem;flex-wrap:wrap;margin-bottom:.8rem;}
+  input,select,button{font-family:"Inter",sans-serif;font-size:.95rem;padding:.75rem .9rem;border:1.5px solid var(--line);border-radius:4px;background:var(--card);color:var(--ink);}
+  .search-row input{flex:2;min-width:170px;}
+  input:focus,select:focus,button:focus{outline:2px solid var(--gold);outline-offset:1px;}
   button.go{background:var(--red);color:#fff;border-color:var(--red);font-weight:600;cursor:pointer;flex:0 0 auto;}
   button.go:hover{background:#9A1636;}
+  .filter-row{display:flex;gap:.6rem;flex-wrap:wrap;}
+  .filter-row select{font-size:.85rem;padding:.5rem .7rem;cursor:pointer;}
+  .remote-toggle{display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:var(--muted);border:1.5px solid var(--line);border-radius:4px;padding:.5rem .8rem;cursor:pointer;}
+  .remote-toggle input{width:auto;padding:0;border:none;}
 
-  main{max-width:920px;margin:0 auto;padding:2.6rem 1.5rem 4rem;}
+  main{max-width:1000px;margin:0 auto;padding:2.4rem 1.5rem 4rem;}
   .section-label{color:var(--muted);font-size:.9rem;font-weight:500;margin:0 0 1.2rem;}
   .job{border:1px solid var(--line);border-left:3px solid var(--navy);background:var(--card);border-radius:4px;padding:1.2rem 1.3rem;margin-bottom:.9rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;}
   .job h3{margin:0 0 .25rem;font-size:1.15rem;font-family:"Fraunces",Georgia,serif;font-weight:600;}
@@ -62,39 +72,72 @@
   :root[data-theme="dark"] .pay{color:#EDEFF2;background:#232A33;}
   @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pay{color:#EDEFF2;background:#232A33;}}
   .empty{text-align:center;color:var(--muted);padding:3.5rem 1rem;font-style:italic;border:1px dashed var(--line);border-radius:6px;}
-
   footer{border-top:1px solid var(--line);padding:1.6rem 1.5rem;text-align:center;color:var(--muted);font-size:.85rem;}
 </style>
 </head>
 <body>
 <div class="ribbon"></div>
+<nav>
+  <div class="nav-wrap">
+    <div class="brand">
+      <svg class="flag" width="24" height="16" viewBox="0 0 26 18" xmlns="http://www.w3.org/2000/svg">
+        <rect width="26" height="18" fill="#B31942"/>
+        <rect y="1.38" width="26" height="1.38" fill="#fff"/><rect y="4.15" width="26" height="1.38" fill="#fff"/>
+        <rect y="6.92" width="26" height="1.38" fill="#fff"/><rect y="9.69" width="26" height="1.38" fill="#fff"/>
+        <rect y="12.46" width="26" height="1.38" fill="#fff"/><rect y="15.23" width="26" height="1.38" fill="#fff"/>
+        <rect width="11" height="9.69" fill="#0A3161"/>
+      </svg>
+      USAWorkFinder
+    </div>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#" title="Coming soon">Company Reviews</a>
+      <a href="#" title="Coming soon">Find Salaries</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙 Dark</button>
+      <a href="#" title="Coming soon">Sign in</a>
+      <a href="#" class="post-btn" title="Coming soon">Post a Job</a>
+    </div>
+  </div>
+</nav>
+
 <header>
   <div class="wrap">
-    <div class="top-row">
-      <div class="brand">
-        <svg class="flag" width="26" height="18" viewBox="0 0 26 18" xmlns="http://www.w3.org/2000/svg">
-          <rect width="26" height="18" fill="#B31942"/>
-          <rect y="1.38" width="26" height="1.38" fill="#fff"/>
-          <rect y="4.15" width="26" height="1.38" fill="#fff"/>
-          <rect y="6.92" width="26" height="1.38" fill="#fff"/>
-          <rect y="9.69" width="26" height="1.38" fill="#fff"/>
-          <rect y="12.46" width="26" height="1.38" fill="#fff"/>
-          <rect y="15.23" width="26" height="1.38" fill="#fff"/>
-          <rect width="11" height="9.69" fill="#0A3161"/>
-        </svg>
-        USAWorkFinder
-      </div>
-      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙 Dark</button>
-    </div>
     <h1>Find work across America.</h1>
     <p>Live listings pulled from employers nationwide — one search, every state.</p>
   </div>
 </header>
 
 <div class="search-card">
-  <input id="q" placeholder="Job title — e.g. Accountant">
-  <input id="loc" placeholder="City or state (optional)">
-  <button class="go" onclick="search()">Search jobs</button>
+  <div class="search-row">
+    <input id="q" placeholder="Job title — e.g. Accountant">
+    <input id="loc" placeholder="City or state (optional)">
+    <button class="go" onclick="search()">Search jobs</button>
+  </div>
+  <div class="filter-row">
+    <select id="jobType">
+      <option value="">Job type: Any</option>
+      <option value="full_time">Full-time</option>
+      <option value="part_time">Part-time</option>
+      <option value="contract">Contract</option>
+    </select>
+    <select id="salaryMin">
+      <option value="">Pay: Any</option>
+      <option value="30000">$30,000+</option>
+      <option value="50000">$50,000+</option>
+      <option value="70000">$70,000+</option>
+      <option value="100000">$100,000+</option>
+    </select>
+    <select id="datePosted">
+      <option value="">Date posted: Any time</option>
+      <option value="1">Last 24 hours</option>
+      <option value="3">Last 3 days</option>
+      <option value="7">Last 7 days</option>
+      <option value="30">Last month</option>
+    </select>
+    <label class="remote-toggle"><input type="checkbox" id="remote"> Remote only</label>
+  </div>
 </div>
 
 <main>
@@ -125,12 +168,17 @@ try{ applyStoredTheme(); }catch(e){}
 async function search(){
   const what = document.getElementById('q').value;
   const where = document.getElementById('loc').value;
+  const jobType = document.getElementById('jobType').value;
+  const salaryMin = document.getElementById('salaryMin').value;
+  const datePosted = document.getElementById('datePosted').value;
+  const remote = document.getElementById('remote').checked ? '1' : '';
   const el = document.getElementById('jobs');
   const label = document.getElementById('label');
   label.textContent = 'Searching…';
   el.innerHTML = '';
+  const params = new URLSearchParams({ what, where, job_type: jobType, salary_min: salaryMin, max_days_old: datePosted, remote });
   try{
-    const res = await fetch(`/.netlify/functions/jobs?what=${encodeURIComponent(what)}&where=${encodeURIComponent(where)}`);
+    const res = await fetch(`/.netlify/functions/jobs?${params.toString()}`);
     const jobs = await res.json();
     if(jobs.length){
       label.textContent = `${jobs.length} jobs found`;
