@@ -1,11 +1,22 @@
 // This runs on Netlify's server, NOT in the browser — so the API keys stay hidden.
 exports.handler = async function (event) {
-  const { what = "", where = "" } = event.queryStringParameters || {};
+  const {
+    what = "", where = "", salary_min = "", job_type = "",
+    max_days_old = "", remote = ""
+  } = event.queryStringParameters || {};
 
   const appId = process.env.ADZUNA_APP_ID;
   const appKey = process.env.ADZUNA_APP_KEY;
 
-  const url = `https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=${appId}&app_key=${appKey}&results_per_page=20&what=${encodeURIComponent(what)}&where=${encodeURIComponent(where)}&content-type=application/json`;
+  const finalWhat = remote === "1" ? `${what} remote`.trim() : what;
+
+  let url = `https://api.adzuna.com/v1/api/jobs/us/search/1?app_id=${appId}&app_key=${appKey}&results_per_page=20&what=${encodeURIComponent(finalWhat)}&where=${encodeURIComponent(where)}&content-type=application/json`;
+
+  if (salary_min) url += `&salary_min=${encodeURIComponent(salary_min)}`;
+  if (max_days_old) url += `&max_days_old=${encodeURIComponent(max_days_old)}`;
+  if (job_type === "full_time") url += `&full_time=1`;
+  if (job_type === "part_time") url += `&part_time=1`;
+  if (job_type === "contract") url += `&contract=1`;
 
   try {
     const res = await fetch(url);
